@@ -1,0 +1,70 @@
+import numpy as np
+
+# array of names
+names = np.array([
+    "A", 
+    "B", 
+    "C", 
+    "D", 
+    "E", 
+    "F", 
+    "G", 
+    "H", 
+    "I", 
+    "J", 
+    "K", 
+    "L", 
+    "M", 
+    "N"
+])
+
+print(names.size)
+
+# create array to store pairs
+pairs = np.full((int(names.size/2), 2), -1)
+used = np.full(int(names.size), -1)
+
+# loop through to get pairs
+for i in range(0,int(names.size/2)):
+
+  # loop until two unique randoms
+  two_random = 0
+  while two_random == 0:
+
+    # get random numbers
+    rand_1 = np.random.randint(names.size)
+    rand_2 = np.random.randint(names.size)
+
+    #check that two unique
+    if rand_1 != rand_2:
+
+      # check not used numbers
+      already_used = 0
+      for j in range(0, used.size):
+        if rand_1 == used[j] or rand_2 == used[j]:
+          already_used = 1
+      
+      # declare good numbers if unique and not used
+      if already_used == 0:
+        two_random = 1
+  
+  # exit while loop with random numbers
+
+  # add used numbers to list
+  used[2*i] = rand_1
+  used[2*i + 1] = rand_2
+
+  # test printing to check the used list each time
+  #print("")
+  #print("i=" + str(i))
+  #for k in range(0, used.size):
+  #  print(used[k])
+
+  # store this pair
+  pairs[i,0] = rand_1
+  pairs[i,1] = rand_2
+
+print("")
+# print pairs
+for i in range(0,int(names.size/2)):
+  print(names[pairs[i,0]] +" and " + names[pairs[i,1]])
